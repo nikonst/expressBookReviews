@@ -10,6 +10,38 @@ public_users.post("/register", (req,res) => {
   return res.status(300).json({message: "New user registered"});
 });
 
+// Get the book list available in the shop using async callback function
+async function getBooks() {
+  return books
+}
+
+public_users.get('/async/',function (req, res) {
+  getBooks().then(result => {
+    return res.status(300).json(result);
+  })
+});
+// Get the book list available in the shop using async callback function
+// *******************************************
+// Get book details based on ISBN using Promise
+const myPromise = new Promise(function(resolve, reject) {
+  let data = books
+  if(data) {
+    resolve(data)
+  }
+  else {
+    reject("Error");
+  }
+});
+
+public_users.get('/promise/isbn/:isbn',function (req, res) {
+  myPromise.then(result => {
+    if(result.hasOwnProperty(req.params.isbn)) {
+      return res.status(300).json(result[req.params.isbn]);
+    }})
+});
+// Get book details based on ISBN usiing Promise
+// *******************************************
+
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   return res.status(300).json(books);
