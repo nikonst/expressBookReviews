@@ -6,7 +6,7 @@ const public_users = express.Router();
 
 
 public_users.post("/register", (req,res) => {
-  users.push({username: req.query.username, password: req.query.password})
+  users.push({username: req.body.username, password: req.body.password})
   return res.status(300).json({message: "New user registered"});
 });
 
