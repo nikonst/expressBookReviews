@@ -27,8 +27,8 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 
 //only registered users can login
 regd_users.post("/login", (req,res) => {
-  if(authenticatedUser(req.params.username, req.params.password)) {
-    return true
+  if(authenticatedUser(req.query.username, req.query.password)) {
+    return res.status(300).json({message: "User Logged"});
   } else {
     return res.status(300).json({message: "Invalid credentials"});
   }
