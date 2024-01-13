@@ -21,6 +21,7 @@ public_users.get('/async/',function (req, res) {
   })
 });
 // Get the book list available in the shop using async callback function
+
 // *******************************************
 // Get book details based on ISBN using Promise
 const myPromise = new Promise(function(resolve, reject) {
@@ -39,7 +40,7 @@ public_users.get('/promise/isbn/:isbn',function (req, res) {
       return res.status(300).json(result[req.params.isbn]);
     }})
 });
-// Get book details based on ISBN usiing Promise
+// Get book details based on ISBN using Promise
 // *******************************************
 
 // Get the book list available in the shop
