@@ -67,6 +67,27 @@ public_users.get('/author/:author', function (req, res) {
   return res.status(300).json({ message: "No Author found" });
 });
 
+// Get all books based on title
+public_users.get('/title/:title', function (req, res) {
+  for (const [key, value] of Object.entries(books)) {
+    let obj = Object.values(value)
+    if (obj[1] === req.params.title) {
+      return res.status(300).json(obj);
+    }
+  }
+  return res.status(300).json({ message: "No Title found" });
+});
+
+//  Get book review
+public_users.get('/review/:isbn', function (req, res) {
+  for (const [key, value] of Object.entries(books)) {
+    if (key === req.params.isbn) {
+      return res.status(300).json(value.reviews);
+    }
+  }
+  return res.status(300).json({ message: "Invalid isbn" });
+});
+
 // AXIOS *************************************
 // Get book details based on author using Axios
 public_users.get('/axios/author/:author', function (req, res) {
@@ -98,26 +119,5 @@ public_users.get('/axios/title/:title', function (req, res) {
   })
 });
 // AXIOS *************************************
-
-// Get all books based on title
-public_users.get('/title/:title', function (req, res) {
-  for (const [key, value] of Object.entries(books)) {
-    let obj = Object.values(value)
-    if (obj[1] === req.params.title) {
-      return res.status(300).json(obj);
-    }
-  }
-  return res.status(300).json({ message: "No Title found" });
-});
-
-//  Get book review
-public_users.get('/review/:isbn', function (req, res) {
-  for (const [key, value] of Object.entries(books)) {
-    if (key === req.params.isbn) {
-      return res.status(300).json(value.reviews);
-    }
-  }
-  return res.status(300).json({ message: "Invalid isbn" });
-});
 
 module.exports.general = public_users;
